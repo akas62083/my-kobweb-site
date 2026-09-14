@@ -1,4 +1,4 @@
-package com.example.site.pages
+package com.example.site.pages.blog
 
 import androidx.compose.runtime.Composable
 import com.varabyte.kobweb.core.Page
@@ -8,7 +8,7 @@ import org.jetbrains.compose.web.dom.Text
 
 @Page
 @Composable
-fun HomePage() {
-    H1 { Text("My Blog") }
-    P { Text("kotlin + kobweb で作っているブログです。") }
+fun BlogPage() {
+    H1 { Text("Blog") }
+    P { Text("記事一覧") }
 }
