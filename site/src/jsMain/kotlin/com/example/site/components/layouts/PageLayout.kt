@@ -15,14 +15,8 @@ import org.jetbrains.compose.web.dom.Main
 @Layout
 fun PageLayout(content: @Composable () -> Unit) {
     Column(modifier = Modifier.fillMaxSize()) {
-        Header {
-            SiteHeader()
-        }
-        Main {
-            content()
-        }
-        Footer {
-            SiteFooter()
-        }
+        SiteHeader()
+        content()
+        SiteFooter()
     }
 }
