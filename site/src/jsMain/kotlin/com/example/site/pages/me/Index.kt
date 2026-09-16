@@ -1,4 +1,4 @@
-package com.example.site.pages.blog
+package com.example.site.pages.me
 
 import androidx.compose.runtime.Composable
 import com.example.site.components.layouts.PageLayout
@@ -9,9 +9,11 @@ import org.jetbrains.compose.web.dom.Text
 
 @Page
 @Composable
-fun BlogPage() {
+fun AboutPage() {
     PageLayout {
-        H1 { Text("Blog") }
-        P { Text("記事一覧") }
+        H1 { Text("About") }
+        P {
+            Text("まだ")
+        }
     }
 }
