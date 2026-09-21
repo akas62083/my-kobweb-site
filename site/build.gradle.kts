@@ -5,6 +5,7 @@ plugins {
     alias(libs.plugins.compose.compiler)
     alias(libs.plugins.kobweb.application)
     alias(libs.plugins.kobwebx.markdown)
+    alias(libs.plugins.kotlin.serialization)
 }
 
 group = "com.example.site"
@@ -33,6 +34,9 @@ kotlin {
             implementation(libs.compose.html.core)
             implementation(libs.kobweb.core)
             implementation(libs.kobweb.silk)
+
+            implementation("io.ktor:ktor-client-core:3.0.0")
+            implementation("io.ktor:ktor-serialization-kotlinx-json:3.0.0")
             // This default template uses built-in SVG icons, but what's available is limited.
             // Uncomment the following if you want access to a large set of font-awesome icons:
             // implementation(libs.silk.icons.fa)
@@ -45,3 +49,4 @@ kotlin {
 //        }
     }
 }
+
