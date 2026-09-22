@@ -1,6 +1,7 @@
 package com.example.site.pages.blog
 
 import androidx.compose.runtime.Composable
+import com.example.site.UiState
 import com.example.site.components.layouts.PageLayout
 import com.varabyte.kobweb.core.Page
 import org.jetbrains.compose.web.dom.H1
