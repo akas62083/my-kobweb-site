@@ -78,6 +78,11 @@ fun AboutPage() {
                     val state = uiState.pageState as Pages.English
                     if (state.status is EnglishStatus.Waiting) {
                         Button(
+                            onClick = { viewModel.oauth() }
+                        ) {
+                            Text("テスト")
+                        }
+                        Button(
                             onClick = { viewModel.pushStartButton() }
                         ) { Text(if (!uiState.isLoading) "送信" else "送信中...") }
                     } else if (state.status is EnglishStatus.Solving) {

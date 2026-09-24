@@ -5,9 +5,11 @@ import androidx.compose.runtime.rememberCoroutineScope
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.request.post
+import io.ktor.client.request.get
 import io.ktor.client.request.setBody
 import io.ktor.http.ContentType
 import io.ktor.http.contentType
+import kotlinx.browser.window
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
@@ -169,6 +171,11 @@ class ViewModel {
             }
         }
 
+    }
+    fun oauth() {
+        scope.launch {
+            window.location.href = "http://localhost:8081/oidc/google/login"
+        }
     }
 
 
