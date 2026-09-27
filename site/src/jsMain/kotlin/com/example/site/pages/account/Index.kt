@@ -1,27 +1,21 @@
-package com.example.site.pages.blog
+package com.example.site.pages.account
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import com.example.site.UiState
 import com.example.site.components.layouts.LocalAppViewModel
 import com.example.site.components.layouts.PageLayout
 import com.varabyte.kobweb.core.Page
-import org.jetbrains.compose.web.dom.H1
-import org.jetbrains.compose.web.dom.P
-import org.jetbrains.compose.web.dom.Text
 
 @Page
 @Composable
-fun BlogPage() {
+fun AccountPage() {
     PageLayout {
         val viewModel = LocalAppViewModel.current
         val uiState by viewModel.uiState.collectAsState()
         LaunchedEffect(Unit) {
-            viewModel.enterBlogPage()
+            viewModel.enterAccountPage()
         }
-        H1 { Text("Blog") }
-        P { Text("記事一覧") }
     }
 }

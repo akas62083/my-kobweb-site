@@ -2,6 +2,7 @@ package com.example.site
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
+import com.example.site.model.LoginStatus
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.request.post
@@ -20,6 +21,7 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
+import kotlin.math.log
 
 class ViewModel {
     private val _uiState = MutableStateFlow(UiState())
@@ -27,6 +29,26 @@ class ViewModel {
 
     private val scope = CoroutineScope(SupervisorJob() + Dispatchers.Default)
     private val client = HttpClient()
+
+    init {
+        scope.launch {
+            try {
+                val result: String = client.get("http://localhost:8081/account/state") {
+                    contentType(ContentType.Application.Json)
+                }.body()
+                var loginStatus: LoginStatus = Json.decodeFromString(result)
+                if(loginStatus == LoginStatus.Registration) {
+                    client.get("http://localhost:8081/remove") {}
+                    loginStatus = LoginStatus.UnLogin
+                }
+                _uiState.update { sc ->
+                    sc.copy(loginStatus = loginStatus)
+                }
+            } catch(e: Exception) {
+                println("error: ${e.message}")
+            }
+        }
+    }
 
     fun handleKey(key: String) {
         if(key.length == 1) {
@@ -104,8 +126,96 @@ class ViewModel {
         }
     }
     fun enterEnglishPage() {
+        scope.launch {
+            try {
+                if (uiState.value.loginStatus == LoginStatus.Registration) {
+                    client.get("http://localhost:8081/remove")
+                    _uiState.update { cs ->
+                        cs.copy(loginStatus = LoginStatus.UnLogin)
+                    }
+                }
+            } catch(e: Exception) {
+                println("error: ${e.message}")
+            }
+        }
         _uiState.update { cs ->
             cs.copy(pageState = Pages.English(EnglishStatus.Waiting))
+        }
+    }
+    fun enterHomePage() {
+        scope.launch {
+            try {
+                if (uiState.value.loginStatus == LoginStatus.Registration) {
+                    client.get("http://localhost:8081/remove")
+                    _uiState.update { cs ->
+                        cs.copy(loginStatus = LoginStatus.UnLogin)
+                    }
+                }
+            } catch(e: Exception) {
+                println("error: ${e.message}")
+            }
+        }
+    }
+    fun enterMePage() {
+        scope.launch {
+            try {
+                if (uiState.value.loginStatus == LoginStatus.Registration) {
+                    client.get("http://localhost:8081/remove")
+                    _uiState.update { cs ->
+                        cs.copy(loginStatus = LoginStatus.UnLogin)
+                    }
+                }
+            } catch (e: Exception) {
+                println("ERROR: ${e.message}")
+            }
+        }
+    }
+    fun enterBlogPage() {
+        scope.launch {
+            try {
+                if (uiState.value.loginStatus == LoginStatus.Registration) {
+                    client.get("http://localhost:8081/remove")
+                    _uiState.update { cs ->
+                        cs.copy(loginStatus = LoginStatus.UnLogin)
+                    }
+                }
+            } catch (e: Exception) {
+                println("Error: ${e.message}")
+            }
+        }
+    }
+    fun enterAccountPage() {
+        scope.launch {
+            try {
+                val result: String = client.get("http://localhost:8081/account/state") {
+                    contentType(ContentType.Application.Json)
+                }.body()
+                var loginStatus: LoginStatus = Json.decodeFromString(result)
+                if(loginStatus == LoginStatus.Registration) {
+                    client.get("http://localhost:8081/remove") {}
+                    loginStatus = LoginStatus.UnLogin
+                }
+                _uiState.update { sc ->
+                    sc.copy(loginStatus = loginStatus)
+                }
+            } catch(e: Exception) {
+                println("error: ${e.message}")
+            }
+        }
+    }
+    fun enterCreatePage() {
+        scope.launch {
+            try {
+                val result: String = client.get("http://localhost:8081/account/state") {
+                    contentType(ContentType.Application.Json)
+                }.body()
+                val loginStatus = Json.decodeFromString<LoginStatus>(result)
+                _uiState.update { cs ->
+                    cs.copy(loginStatus = loginStatus)
+                }
+            } catch(e: Exception) {
+                println("error: ${e.message}")
+            }
         }
     }
     fun pushStartButton() {

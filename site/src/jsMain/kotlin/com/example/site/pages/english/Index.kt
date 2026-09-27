@@ -59,7 +59,7 @@ import org.jetbrains.compose.web.dom.Ul
 
 @Page
 @Composable
-fun AboutPage() {
+fun EnglishPage() {
     PageLayout {
         val viewModel = LocalAppViewModel.current
         val uiState by viewModel.uiState.collectAsState()

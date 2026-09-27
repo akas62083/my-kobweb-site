@@ -1,9 +1,11 @@
 package com.example.site
 
+import com.example.site.model.LoginStatus
 import kotlinx.serialization.Serializable
 
 data class UiState(
     val pageState: Pages = Pages.None,
+    val loginStatus: LoginStatus = LoginStatus.UnLogin,
     val isLoading: Boolean = false,
     val sendText: Boolean = false,
     val myData: MyData = MyData(2, 2, 2, 2, 2, 2, 2) // 仮に。将来的には repo から取るかな?

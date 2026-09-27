@@ -2,6 +2,10 @@ package com.example.site.pages
 
 import com.example.site.components.layouts.PageLayout
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import com.example.site.components.layouts.LocalAppViewModel
 import com.varabyte.kobweb.compose.foundation.layout.Arrangement
 import com.varabyte.kobweb.compose.foundation.layout.Box
 import com.varabyte.kobweb.compose.foundation.layout.Column
@@ -27,6 +31,11 @@ import org.jetbrains.compose.web.dom.Text
 @Composable
 fun HomePage() {
     PageLayout {
+        val viewModel = LocalAppViewModel.current
+        val uiState by viewModel.uiState.collectAsState()
+        LaunchedEffect(Unit) {
+            viewModel.enterHomePage()
+        }
         Row(
             modifier = Modifier.fillMaxSize()
                 .background(color = Color.darkred),
